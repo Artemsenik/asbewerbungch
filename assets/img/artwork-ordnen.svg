@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none">
+  <rect width="640" height="480" fill="#FBFAF7"/>
+  <!-- chaotic lines (left third, fading) -->
+  <g stroke="#9A5B3F" stroke-width="2" stroke-linecap="round" opacity="0.55">
+    <path d="M40 90 Q90 60 70 130 T140 150"/>
+    <path d="M30 180 Q80 220 50 250 T120 260"/>
+    <path d="M60 320 Q110 290 90 360 T160 380"/>
+  </g>
+  <!-- transition dots -->
+  <g fill="#CBC5B7">
+    <circle cx="220" cy="120" r="3"/>
+    <circle cx="250" cy="200" r="3"/>
+    <circle cx="230" cy="280" r="3"/>
+    <circle cx="260" cy="350" r="3"/>
+  </g>
+  <!-- ordered lines (right two thirds) -->
+  <g stroke="#143F3C" stroke-width="2.5" stroke-linecap="round">
+    <line x1="320" y1="110" x2="600" y2="110"/>
+    <line x1="320" y1="150" x2="540" y2="150"/>
+    <line x1="320" y1="190" x2="580" y2="190" opacity="0.6"/>
+
+    <line x1="320" y1="250" x2="600" y2="250"/>
+    <line x1="320" y1="290" x2="520" y2="290"/>
+    <line x1="320" y1="330" x2="570" y2="330" opacity="0.6"/>
+
+    <line x1="320" y1="390" x2="600" y2="390"/>
+    <line x1="320" y1="430" x2="500" y2="430"/>
+  </g>
+  <circle cx="300" cy="110" r="4.5" fill="#143F3C"/>
+  <circle cx="300" cy="250" r="4.5" fill="#143F3C"/>
+  <circle cx="300" cy="390" r="4.5" fill="#143F3C"/>
+</svg>

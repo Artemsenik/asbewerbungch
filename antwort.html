@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="UTF-8">
+  <script>document.documentElement.classList.add("js");</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antwort-Werkstatt 40+ – Ihre Antwort in drei Schritten | AS-Bewerbung.ch</title>
+  <meta name="description" content="Bauen Sie Ihre Antwort auf die gefürchtete Frage im Vorstellungsgespräch – Kündigung, Lücke, Alter, Lohn. In drei geführten Schritten, mit Beispielen, kostenlos.">
+  <link rel="canonical" href="https://www.as-bewerbung.ch/antwort.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:site_name" content="AS-Bewerbung.ch">
+  <meta property="og:title" content="Antwort-Werkstatt 40+ – Ihre Antwort in drei Schritten">
+  <meta property="og:description" content="Bauen Sie Ihre Antwort auf die gefürchtete Frage im Vorstellungsgespräch – in drei geführten Schritten, kostenlos.">
+  <meta property="og:url" content="https://www.as-bewerbung.ch/antwort.html">
+  <meta property="og:image" content="https://www.as-bewerbung.ch/assets/img/og-image.png">
+  <meta name="theme-color" content="#143F3C">
+  <!-- Google Tag (Google Ads) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16692093930"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16692093930');
+  </script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<nav class="container" aria-label="Breadcrumb">
+  <div class="breadcrumb">
+    <a href="index.html">Startseite</a>
+    <span>Antwort-Werkstatt</span>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="tag">Antwort-Werkstatt · kostenlos</div>
+    <h1>Ihre Antwort in drei Schritten</h1>
+    <p class="article-lead">Sie wissen, welche Frage Sie fürchten. Hier bauen Sie Ihre Antwort darauf – Schritt für Schritt, in Ihren eigenen Worten, mit einem Beispiel als Leitplanke. Am Ende haben Sie einen Entwurf, den Sie behalten oder kostenlos prüfen lassen können. Lieber offline und für alle sieben Fragen? Das <a href="workbook.html">Workbook zum Ausfüllen</a> gibt es als PDF.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:1.4rem;padding-bottom:0;">
+  <div class="container">
+    <figure class="workspace-figure">
+      <img src="assets/img/karten-ordnen-wide.webp" alt="Eine Hand ordnet einzelne Karten zu einer klaren Reihe – aus losen Gedanken wird Struktur" width="1536" height="1024" loading="lazy">
+      <figcaption>Genau darum geht es hier: aus einem diffusen Gefühl eine Antwort ordnen, die trägt.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section" style="padding-top:1.6rem;">
+  <div class="container">
+    <div class="diag-app">
+      <div class="diag-main">
+        <div class="diag-progress" aria-hidden="true"><span class="diag-progress-bar" id="awBar"></span></div>
+        <p class="diag-step-label" id="awStepLabel" aria-live="polite">Schritt 1 von 4</p>
+        <div id="awStage"></div>
+      </div>
+      <aside class="diag-live" aria-label="Ihre entstehende Antwort">
+        <p class="diag-live-eyebrow">Ihre Antwort entsteht</p>
+        <div class="diag-live-body" id="awLive" aria-live="polite">
+          <p class="diag-live-placeholder">Wählen Sie zuerst die Frage, die Ihnen Sorgen macht. Danach setzt sich hier Ihre Antwort Satz für Satz zusammen.</p>
+        </div>
+      </aside>
+    </div>
+    <noscript>
+      <p style="margin-top:1.5rem;">Für die Antwort-Werkstatt ist JavaScript nötig. Sie können Ihre Situation auch direkt in der
+        <a href="interview-check.html">kostenlosen Ersteinschätzung</a> schildern.</p>
+    </noscript>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/components.js"></script>
+<script src="js/script.js"></script>
+
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var STEPS = [
+    { n: 1, key: "s1", title: "Was ist passiert?", sub: "Sachlich, ohne Rechtfertigung. Ein bis zwei Sätze genügen." },
+    { n: 2, key: "s2", title: "Was bedeutet das heute?", sub: "Kontext statt Ausrede: Abschluss, Lerneffekt, heutige Stärke." },
+    { n: 3, key: "s3", title: "Warum passen Sie zur Stelle?", sub: "Der Bogen zur neuen Aufgabe – Passung sichtbar machen." }
+  ];
+
+  var TOPICS = {
+    kuendigung: {
+      label: "Warum wurden Sie gekündigt?",
+      weak: "Ich wurde leider gekündigt, weil es intern schwierig war und ich mit der neuen Führung nicht mehr zurechtkam.",
+      hints: [
+        { hint: "Benennen Sie den äusseren Anlass – ohne Schuldzuweisung, ohne Konfliktdetails.", ex: "Nach einer organisatorischen Veränderung passten Rolle und Arbeitsweise nicht mehr zusammen." },
+        { hint: "Welchen Lerneffekt nehmen Sie mit? Enden Sie nicht im Problem.", ex: "Daraus achte ich heute besonders auf klare Verantwortlichkeiten und eine fachlich passende Aufgabe." },
+        { hint: "Warum reizt Sie genau diese Rolle?", ex: "Genau deshalb passt diese Stelle: eine klar umrissene Aufgabe, in der meine Erfahrung mit [Stärke] wirkt." }
+      ],
+      s: "Ich wurde gekündigt", u: "Kündigung erklären", r: "ratgeber-kuendigung.html"
+    },
+    luecke: {
+      label: "Was haben Sie in dieser Zeit gemacht?",
+      weak: "Da war eine Zeit, in der ich nicht gearbeitet habe. Das ist eine längere Geschichte.",
+      hints: [
+        { hint: "Benennen Sie die Lücke ruhig und knapp – nur so viel, wie für die Stelle relevant ist.", ex: "In dieser Zeit habe ich [Familie / Gesundheit / Neuorientierung] geordnet." },
+        { hint: "Betonen Sie den Abschluss und was Sie mitnehmen.", ex: "Diese Phase ist abgeschlossen – ich bringe daraus [Erkenntnis] mit und bin voll einsatzfähig." },
+        { hint: "Was suchen Sie jetzt gezielt?", ex: "Jetzt suche ich eine Aufgabe wie diese, in der [Stärke] wirklich gefragt ist." }
+      ],
+      s: "Ich habe eine Lücke im Lebenslauf", u: "Lücke erklären", r: "ratgeber-luecke.html"
+    },
+    krankheit: {
+      label: "Sie waren länger nicht berufstätig – warum?",
+      weak: "Ich war länger krank, darüber spreche ich nicht so gern.",
+      hints: [
+        { hint: "Keine Diagnosen nötig – benennen Sie knapp eine gesundheitliche Phase.", ex: "Ich habe diese Zeit genutzt, um eine gesundheitliche Situation vollständig auszukurieren." },
+        { hint: "Abschluss und heutige Belastbarkeit ruhig bestätigen.", ex: "Sie ist abgeschlossen; ich bin heute voll einsatzfähig und arbeite strukturierter als zuvor." },
+        { hint: "Was bringen Sie dadurch gerade dieser Rolle mit?", ex: "Für diese Aufgabe bringe ich damit [Stärke] mit – und die Ruhe, Prioritäten richtig zu setzen." }
+      ],
+      s: "Ich war krank / nach Burnout in Pause", u: "Krankheit / Burnout erklären", r: "ratgeber-krankheit.html"
+    },
+    alter: {
+      label: "Passt diese Rolle noch zu Ihrer langen Erfahrung?",
+      weak: "Ich weiss, mit über 50 hat man es schwerer, aber ich bin fit.",
+      hints: [
+        { hint: "Verteidigen Sie nicht das Alter – nennen Sie eine konkrete, aktuelle Leistung.", ex: "In den letzten zwei Jahren habe ich [Aufgabe/Projekt] übernommen und [Ergebnis] erreicht." },
+        { hint: "Zeigen Sie Aktualität: neues Werkzeug, Methode, Weiterbildung.", ex: "Dabei habe ich [Werkzeug/Methode] eingeführt – ich halte mich bewusst auf dem Stand." },
+        { hint: "Wo genau zählt Ihre Erfahrung in dieser Rolle?", ex: "Genau diese Erfahrung setze ich dort ein, wo es hier zählt: [Anforderung]." }
+      ],
+      s: "Ich bin unsicher wegen Alter oder Überqualifikation", u: "Alter / Überqualifikation", r: "ratgeber-erfahrung.html"
+    },
+    ueberqualifikation: {
+      label: "Sind Sie nicht überqualifiziert?",
+      weak: "Überqualifiziert bin ich nicht, ich brauche einfach einen Job.",
+      hints: [
+        { hint: "Rahmen Sie Erfahrung als bewusstes Plus, nicht als Makel.", ex: "Ich bringe bewusst Erfahrung mit, die über die Grundanforderung hinausgeht." },
+        { hint: "Die stille Sorge ist Bindung – nennen Sie Ihren echten Grund für genau diese Rolle.", ex: "Ich suche gezielt eine Rolle, in der ich [Aufgabe] mit Ruhe und Substanz ausfülle – nicht die nächste Stufe." },
+        { hint: "Warum passt der Zuschnitt dieser Stelle?", ex: "Diese Stelle braucht [Anforderung] – genau das habe ich viele Jahre getan und tue es gern." }
+      ],
+      s: "Ich bin unsicher wegen Alter oder Überqualifikation", u: "Alter / Überqualifikation", r: "ratgeber-ueberqualifikation.html"
+    },
+    betrieb: {
+      label: "Fällt der Wechsel nach so vielen Jahren nicht schwer?",
+      weak: "Ich war 20 Jahre dort, es war einfach Zeit für etwas Neues.",
+      hints: [
+        { hint: "Zeigen Sie Bewegung innerhalb der Kontinuität: Rollen, Projekte, Veränderungen.", ex: "In diesen Jahren habe ich mehrere Rollen und Veränderungen mitgestaltet – von [A] bis [B]." },
+        { hint: "Machen Sie den Wechsel zur bewussten Entscheidung.", ex: "Der Schritt jetzt ist eine bewusste Entscheidung: Ich will mein Können in ein neues Umfeld einbringen." },
+        { hint: "Belegen Sie Lernfähigkeit mit einem Beispiel.", ex: "Diese Rolle passt, weil sie [Stärke] braucht – und Neues nehme ich schnell auf, wie zuletzt bei [Beispiel]." }
+      ],
+      s: "Ich möchte mich neu orientieren", u: "Anderes", r: "ratgeber-tenure.html"
+    },
+    konflikt: {
+      label: "Wie kam es zum Ende beim letzten Arbeitgeber?",
+      weak: "Mit meinem alten Chef gab es massive Probleme, der war wirklich schwierig.",
+      hints: [
+        { hint: "Sachlich bleiben – niemals Personen abwerten.", ex: "Am Ende gingen die Vorstellungen über [Zusammenarbeit / Ausrichtung] auseinander." },
+        { hint: "Leiten Sie einen eigenen Lernpunkt ab.", ex: "Ich habe daraus gelernt, wie wichtig mir [Wert] ist – darauf achte ich heute früher." },
+        { hint: "Was sehen Sie in dieser Rolle als gegeben?", ex: "In dieser Rolle sehe ich genau das: [was passt] – deshalb bewerbe ich mich gezielt hier." }
+      ],
+      s: "Ich wurde gekündigt", u: "Anderes", r: "ratgeber-kuendigung.html"
+    },
+    lohn: {
+      label: "Was ist Ihre Lohnvorstellung?",
+      weak: "Ich hätte gern mindestens gleich viel wie vorher – das sind [Zahl] Franken.",
+      hints: [
+        { hint: "Nicht zu früh fixieren – knüpfen Sie an den Zuschnitt der Rolle an.", ex: "Das hängt für mich vom Zuschnitt der Rolle ab." },
+        { hint: "Nennen Sie eine marktorientierte Spanne, deren Untergrenze Sie vorher für sich kennen.", ex: "Auf Basis des Marktniveaus bewege ich mich in einer Spanne von [X–Y]." },
+        { hint: "Halten Sie das Gespräch offen.", ex: "Sobald die Aufgaben konkret sind, präzisieren wir das gern gemeinsam." }
+      ],
+      s: "Anderes", u: "Lohnfrage", r: "ratgeber-lohnfrage.html"
+    }
+  };
+
+  var topicKey = null, drafts = { s1: "", s2: "", s3: "" }, idx = 0; // idx 0 = Themenwahl, 1..3 = Schritte
+  var stage = document.getElementById('awStage');
+  var bar = document.getElementById('awBar');
+  var stepLabel = document.getElementById('awStepLabel');
+  var live = document.getElementById('awLive');
+
+  function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+  function topic(){ return topicKey ? TOPICS[topicKey] : null; }
+
+  function renderLive(){
+    var parts = [drafts.s1, drafts.s2, drafts.s3].map(function(t){return t.trim();}).filter(Boolean);
+    if (!parts.length){
+      live.innerHTML = '<p class="diag-live-placeholder">' + (topicKey
+        ? 'Schreiben Sie den ersten Satz – hier setzt sich Ihre Antwort zusammen.'
+        : 'Wählen Sie zuerst die Frage, die Ihnen Sorgen macht. Danach setzt sich hier Ihre Antwort Satz für Satz zusammen.') + '</p>';
+      return;
+    }
+    live.innerHTML = parts.map(function(p,i){
+      return '<p class="diag-live-line" style="animation-delay:'+(i*0.05)+'s">'+esc(p)+'</p>';
+    }).join('');
+  }
+
+  function setProgress(){
+    bar.style.width = Math.round(idx/4*100)+'%';
+    stepLabel.textContent = idx===0 ? 'Schritt 1 von 4 – Ihre Frage' : 'Schritt '+(idx+1)+' von 4';
+  }
+
+  function transition(fn){
+    if (reduce){ fn(); return; }
+    stage.classList.add('diag-out');
+    setTimeout(function(){ fn(); stage.classList.remove('diag-out'); }, 160);
+  }
+
+  function renderTopicSelect(){
+    setProgress();
+    var html = '<div class="diag-card"><h2 class="diag-q">Welche Frage fürchten Sie?</h2>';
+    html += '<p class="diag-hint">Wählen Sie die Frage, die Ihnen im Gespräch am meisten Sorgen macht.</p>';
+    html += '<div class="diag-options">';
+    Object.keys(TOPICS).forEach(function(k){
+      var sel = topicKey===k ? ' diag-selected' : '';
+      html += '<button type="button" class="diag-option'+sel+'" data-topic="'+k+'">'+
+              '<span class="diag-option-tick" aria-hidden="true"></span><span>«'+esc(TOPICS[k].label)+'»</span></button>';
+    });
+    html += '</div></div>';
+    stage.innerHTML = html;
+    stage.querySelectorAll('.diag-option').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var nk = btn.getAttribute('data-topic');
+        if (topicKey !== nk){ drafts = { s1:"", s2:"", s3:"" }; }
+        topicKey = nk;
+        stage.querySelectorAll('.diag-option').forEach(function(b){b.classList.remove('diag-selected');});
+        btn.classList.add('diag-selected');
+        renderLive();
+        setTimeout(function(){ idx = 1; transition(renderBuildStep); }, reduce?0:220);
+      });
+    });
+    var f = stage.querySelector('.diag-option'); if (f) f.focus();
+  }
+
+  function renderBuildStep(){
+    setProgress();
+    var t = topic(), st = STEPS[idx-1], h = t.hints[idx-1];
+    var html = '<div class="diag-card">';
+    html += '<p class="diag-result-eyebrow">«'+esc(t.label)+'» · Schritt '+st.n+' von 3</p>';
+    html += '<h2 class="diag-q">'+esc(st.title)+'</h2>';
+    html += '<p class="diag-hint">'+esc(st.sub)+' '+esc(h.hint)+'</p>';
+    if (idx===1){
+      html += '<div class="diag-example" style="border-top:none;padding-top:0;">';
+      html += '<p class="diag-example-bad"><span>So klingt es unvorbereitet</span>„'+esc(t.weak)+'"</p></div>';
+    }
+    html += '<p class="diag-example-good" style="margin-bottom:1rem;"><span>Leitplanke</span>„'+esc(h.ex)+'"</p>';
+    html += '<textarea class="diag-textarea" id="awText" rows="3" placeholder="Ihr Satz in eigenen Worten …">'+esc(drafts[st.key])+'</textarea>';
+    html += '<div class="diag-nav">';
+    html += '<button type="button" class="btn btn-secondary" data-back>Zurück</button>';
+    html += '<button type="button" class="btn btn-primary" data-next>'+(idx<3?'Weiter →':'Antwort ansehen →')+'</button>';
+    html += '</div></div>';
+    stage.innerHTML = html;
+
+    var ta = document.getElementById('awText');
+    ta.addEventListener('input', function(){ drafts[st.key] = ta.value; renderLive(); });
+    stage.querySelector('[data-back]').addEventListener('click', function(){
+      idx = idx-1; transition(idx===0 ? renderTopicSelect : renderBuildStep);
+    });
+    stage.querySelector('[data-next]').addEventListener('click', function(){
+      if (idx<3){ idx++; transition(renderBuildStep); } else { idx = 4; transition(renderResult); }
+    });
+    ta.focus();
+  }
+
+  function assembled(){
+    return [drafts.s1, drafts.s2, drafts.s3].map(function(t){return t.trim();}).filter(Boolean).join(' ');
+  }
+
+  function renderResult(){
+    setProgress(); bar.style.width='100%'; stepLabel.textContent='Ihr Entwurf';
+    var t = topic(), full = assembled();
+    var html = '<div class="diag-result">';
+    html += '<p class="diag-result-eyebrow">«'+esc(t.label)+'»</p>';
+    html += '<h2 class="diag-result-title">Ihr Antwort-Entwurf</h2>';
+    if (full){
+      html += '<div class="diag-formulation">';
+      html += '<p class="diag-formulation-label">In Ihren Worten – zum Anpassen und Behalten</p>';
+      html += '<textarea class="diag-textarea" id="awResultText" rows="5">'+esc(full)+'</textarea>';
+      html += '<p class="diag-formulation-hint">Ein Entwurf ist der erste Schritt – ob er ruhig und glaubwürdig klingt, zeigt sich im Sprechen. Genau das prüfen wir in der kostenlosen Ersteinschätzung.</p>';
+      html += '</div>';
+    } else {
+      html += '<p class="diag-result-text">Sie haben noch keinen eigenen Satz formuliert. Gehen Sie zurück und beginnen Sie mit Schritt 1 – die Leitplanken helfen.</p>';
+    }
+    html += '<div class="diag-result-actions">';
+    if (full) html += '<a href="#" class="btn btn-primary" id="awToForm">Diese Antwort kostenlos prüfen lassen</a>';
+    html += '<a href="'+t.r+'" class="btn btn-secondary">Passenden Ratgeber lesen</a>';
+    if (full) html += '<button type="button" class="btn btn-secondary" id="awCopy">Antwort kopieren</button>';
+    html += '</div>';
+    html += '<p class="diag-result-reassure">Kostenlos &amp; unverbindlich · persönliche Antwort in 1–2 Werktagen · oder direkt anrufen: <a href="tel:+41795148276">+41&nbsp;79&nbsp;514&nbsp;82&nbsp;76</a></p>';
+    html += '<p class="diag-restart"><button type="button" class="diag-linkbtn" id="awRestart">Andere Frage wählen</button></p>';
+    html += '</div>';
+    stage.innerHTML = html;
+    renderLive();
+
+    if (typeof gtag==='function'){ try{ gtag('event','antwort_erstellt',{thema:topicKey}); }catch(e){} }
+
+    var toForm = document.getElementById('awToForm');
+    if (toForm) toForm.addEventListener('click', function(e){
+      e.preventDefault();
+      var txt = document.getElementById('awResultText').value;
+      var d = 'Meine Antwort auf «'+t.label+'»: '+txt;
+      window.location.href = 'interview-check.html?d='+encodeURIComponent(d)+'&s='+encodeURIComponent(t.s)+'&u='+encodeURIComponent(t.u);
+    });
+    var copyBtn = document.getElementById('awCopy');
+    if (copyBtn) copyBtn.addEventListener('click', function(){
+      var txt = document.getElementById('awResultText').value;
+      function done(){ copyBtn.textContent='Kopiert ✓'; setTimeout(function(){copyBtn.textContent='Antwort kopieren';},1800); }
+      if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, done); }
+      else { var ta=document.getElementById('awResultText'); ta.select(); try{document.execCommand('copy');}catch(e){} done(); }
+    });
+    document.getElementById('awRestart').addEventListener('click', function(){
+      idx = 0; transition(function(){ renderTopicSelect(); renderLive(); });
+    });
+    document.querySelector('.diag-result').scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
+  }
+
+  renderTopicSelect();
+})();
+</script>
+</body>
+</html>

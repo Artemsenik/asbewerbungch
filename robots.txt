@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# KI-/LLM-Suchmaschinen ausdrücklich erlauben
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.as-bewerbung.ch/sitemap.xml

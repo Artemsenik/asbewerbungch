@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="UTF-8">
+  <script>document.documentElement.classList.add("js");</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bewerbungs-Diagnose 40+ – wo klemmt es gerade? | AS-Bewerbung.ch</title>
+  <meta name="description" content="In zwei Minuten zur klaren Formulierung Ihres Anliegens: Beantworten Sie ein paar ruhige Fragen und erhalten Sie eine ehrliche Einordnung Ihrer Bewerbungssituation – kostenlos und unverbindlich.">
+  <link rel="canonical" href="https://www.as-bewerbung.ch/diagnose.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:site_name" content="AS-Bewerbung.ch">
+  <meta property="og:title" content="Bewerbungs-Diagnose 40+ – wo klemmt es gerade?">
+  <meta property="og:description" content="In zwei Minuten zur klaren Formulierung Ihres Anliegens – kostenlos und unverbindlich.">
+  <meta property="og:url" content="https://www.as-bewerbung.ch/diagnose.html">
+  <meta property="og:image" content="https://www.as-bewerbung.ch/assets/img/og-image.png">
+  <meta name="theme-color" content="#143F3C">
+  <!-- Google Tag (Google Ads) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16692093930"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16692093930');
+  </script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<nav class="container" aria-label="Breadcrumb">
+  <div class="breadcrumb">
+    <a href="index.html">Startseite</a>
+    <span>Diagnose</span>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="tag">2-Minuten-Diagnose · kostenlos</div>
+    <h1>Wo klemmt es gerade?</h1>
+    <p class="article-lead">Viele wissen, dass sie sich unsicher fühlen – aber nicht genau, woran es liegt. Beantworten Sie ein paar ruhige Fragen. Während Sie das tun, entsteht Schritt für Schritt eine klare Formulierung Ihres Anliegens, die Sie behalten und direkt weiterverwenden können.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:1rem;">
+  <div class="container">
+    <div class="diag-app" id="diagApp">
+      <!-- linke Spalte: Fragen -->
+      <div class="diag-main">
+        <div class="diag-progress" aria-hidden="true"><span class="diag-progress-bar" id="diagBar"></span></div>
+        <p class="diag-step-label" id="diagStepLabel" aria-live="polite">Schritt 1 von 4</p>
+        <div id="diagStage"><!-- JS füllt die Schritte --></div>
+      </div>
+
+      <!-- rechte Spalte: live entstehende Formulierung -->
+      <aside class="diag-live" aria-label="Ihre entstehende Formulierung">
+        <p class="diag-live-eyebrow">Ihre Formulierung entsteht</p>
+        <div class="diag-live-body" id="diagLive" aria-live="polite">
+          <p class="diag-live-placeholder">Sobald Sie antworten, ordnet sich hier Ihr Anliegen – aus einem diffusen Gefühl wird ein klarer Satz.</p>
+        </div>
+      </aside>
+    </div>
+
+    <noscript>
+      <p style="margin-top:1.5rem;">Für die interaktive Diagnose ist JavaScript nötig. Sie können auch direkt die
+        <a href="interview-check.html">kostenlose Ersteinschätzung</a> anfragen.</p>
+    </noscript>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/components.js"></script>
+<script src="js/script.js"></script>
+
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- Datenmodell ----------
+  var STEPS = [
+    {
+      key: "anlass",
+      q: "Wo stehen Sie gerade?",
+      hint: "Wählen Sie, was am ehesten zutrifft.",
+      options: [
+        { v: "gespraech", label: "Ich habe bald ein Vorstellungsgespräch", live: "Ich stehe vor einem Vorstellungsgespräch", w: { gespraech: 2, akut: 1 } },
+        { v: "einladungen", label: "Ich bewerbe mich, bekomme aber kaum Einladungen", live: "Ich bewerbe mich, bekomme aber kaum Einladungen", w: { strategie: 2, unterlagen: 1 } },
+        { v: "neu", label: "Ich orientiere mich beruflich neu", live: "Ich orientiere mich beruflich neu", w: { positionierung: 2, gespraech: 1 } },
+        { v: "unklar", label: "Ich spüre Unsicherheit, weiss aber nicht genau, woran es liegt", live: "Ich spüre Unsicherheit im Bewerbungsprozess", w: { vertrauen: 2, positionierung: 1 } }
+      ]
+    },
+    {
+      key: "thema",
+      q: "Welches Thema macht Ihnen am meisten Gedanken?",
+      hint: "Ein Thema genügt – Sie können es später ergänzen.",
+      options: [
+        { v: "kuendigung", label: "Eine Kündigung erklären", live: "besonders beschäftigt mich, wie ich meine Kündigung erklären soll", w: { gespraech: 2 } },
+        { v: "luecke", label: "Eine Lücke im Lebenslauf", live: "besonders beschäftigt mich die Lücke in meinem Lebenslauf", w: { gespraech: 1, positionierung: 1 } },
+        { v: "krankheit", label: "Krankheit oder eine berufliche Pause", live: "besonders beschäftigt mich, wie ich eine gesundheitliche Pause einordne", w: { gespraech: 1, vertrauen: 1 } },
+        { v: "alter", label: "Mein Alter (40+ / 50+)", live: "besonders beschäftigt mich, wie ich mit über 40 überzeuge", w: { positionierung: 1, vertrauen: 1 } },
+        { v: "ueberqualifikation", label: "Überqualifikation", live: "besonders beschäftigt mich der Eindruck, überqualifiziert zu sein", w: { positionierung: 1, gespraech: 1 } },
+        { v: "einladungen", label: "Ausbleibende Einladungen", live: "besonders beschäftigt mich, dass kaum Einladungen kommen", w: { strategie: 2, unterlagen: 1 } },
+        { v: "lohn", label: "Die Lohnfrage", live: "besonders beschäftigt mich die Lohnfrage", w: { gespraech: 1 } },
+        { v: "konflikt", label: "Ein Konflikt mit dem früheren Arbeitgeber", live: "besonders beschäftigt mich, wie ich einen Konflikt mit dem früheren Arbeitgeber erkläre", w: { gespraech: 2 } },
+        { v: "branchenwechsel", label: "Ein Branchen- oder Rollenwechsel", live: "besonders beschäftigt mich ein Branchen- oder Rollenwechsel", w: { positionierung: 2 } },
+        { v: "betrieb", label: "Neubewerbung nach langer Betriebszugehörigkeit", live: "besonders beschäftigt mich die Neubewerbung nach vielen Jahren im selben Betrieb", w: { positionierung: 1, gespraech: 1 } },
+        { v: "anderes", label: "Etwas anderes", live: "beschäftigt mich ein Thema, das nicht in eine Schublade passt", w: { vertrauen: 1 } }
+      ]
+    },
+    {
+      key: "gefuehl",
+      q: "Was trifft am ehesten zu?",
+      hint: "Das hilft, den Kern einzugrenzen.",
+      options: [
+        { v: "wie", label: "Ich weiss, was ich sagen möchte – aber nicht, wie es souverän klingt", live: "Ich weiss, was ich sagen möchte, aber nicht, wie es souverän klingt.", w: { gespraech: 2 } },
+        { v: "geschichte", label: "Ich weiss nicht, wie ich meine berufliche Geschichte erklären soll", live: "Ich weiss nicht recht, wie ich meine berufliche Geschichte erklären soll.", w: { positionierung: 2, gespraech: 1 } },
+        { v: "resonanz", label: "Meine Unterlagen bekommen kaum Resonanz", live: "Meine Unterlagen bekommen bisher kaum Resonanz.", w: { unterlagen: 2, strategie: 1 } },
+        { v: "satz", label: "Ich kann nicht in einem Satz sagen, wofür ich fachlich stehe", live: "Ich kann noch nicht in einem Satz sagen, wofür ich fachlich stehe.", w: { positionierung: 2 } },
+        { v: "unsicher", label: "Ich fühle mich unsicher und rechtfertige mich oft", live: "Ich merke, dass ich mich oft rechtfertige und unsicher wirke.", w: { vertrauen: 2 } }
+      ]
+    },
+    {
+      key: "eigene",
+      q: "In Ihren eigenen Worten (optional)",
+      hint: "Ein, zwei Sätze genügen. Das macht Ihre Formulierung persönlich.",
+      free: true,
+      placeholder: "Zum Beispiel: „Mein letztes Gespräch lief gut, bis die Frage nach der Kündigung kam.“"
+    }
+  ];
+
+  // Grundtypen → Ergebnis
+  var TYPES = {
+    gespraech:     { title: "Ihr Schwerpunkt liegt im Gespräch.", text: "Fachlich sind Sie überzeugend – die Unsicherheit gilt bestimmten Fragen. Solche Antworten lassen sich vorbereiten, sodass sie ruhig und glaubwürdig klingen, in Ihren eigenen Worten.", offer: "Vorstellungsgespräch-Training 40+" },
+    positionierung:{ title: "Ihr Schwerpunkt liegt in der Positionierung.", text: "Ihre Erfahrung ist da – aber der rote Faden ist noch nicht in einem klaren Satz gebündelt. Wenn diese Klarheit steht, tragen Gespräch und Unterlagen dieselbe Geschichte.", offer: "Interview-Sicherheit oder Bewerbungsprozess" },
+    strategie:     { title: "Ihr Schwerpunkt liegt in der Strategie.", text: "Wenn trotz Bewerbungen kaum Einladungen kommen, liegt es selten an der Erfahrung, sondern an Ausrichtung und Zuschnitt. Wenige gezielte Bewerbungen schlagen viele gestreute.", offer: "Bewerbungsprozess 40+" },
+    unterlagen:    { title: "Ihr Schwerpunkt liegt bei den Unterlagen.", text: "Ihre Unterlagen holen bisher nicht heraus, was in Ihnen steckt. Oft entscheidet, ob in den ersten Sekunden klar wird, wofür Sie stehen.", offer: "Unterlagenprüfung im Bewerbungsprozess" },
+    vertrauen:     { title: "Zuerst geht es um Ihre innere Sicherheit.", text: "Sie bringen mehr mit, als Sie sich gerade zutrauen. Wenn die eigene Geschichte geordnet ist, verschwindet der Rechtfertigungsdruck – und die Wirkung folgt von selbst.", offer: "kostenlose Ersteinschätzung als erster Schritt" },
+    akut:          { title: "Ihr Fall ist zeitkritisch.", text: "Weil ein Gespräch unmittelbar bevorsteht, zählt jetzt gezielte Vorbereitung auf die wahrscheinlichen Fragen – ruhig und fokussiert.", offer: "kurzfristiges Vorstellungsgespräch-Training 40+" }
+  };
+
+  // Themen → passendes Beispiel + Übergabewerte + Ratgeber
+  var THEMES = {
+    kuendigung:      { s: "Ich wurde gekündigt", u: "Kündigung erklären", r: "ratgeber-kuendigung.html",
+      bad: "Ich wurde leider gekündigt, weil es intern schwierig war.", good: "Nach einer organisatorischen Veränderung passten Rolle und Arbeitsweise nicht mehr zusammen – daraus achte ich heute besonders auf klare Verantwortlichkeiten." },
+    luecke:          { s: "Ich habe eine Lücke im Lebenslauf", u: "Lücke erklären", r: "ratgeber-luecke.html",
+      bad: "Da war eine Zeit, in der ich nicht gearbeitet habe.", good: "Diese Zeit habe ich bewusst genutzt und geordnet; sie ist abgeschlossen, und ich bringe daraus eine klare Erkenntnis mit." },
+    krankheit:       { s: "Ich war krank / nach Burnout in Pause", u: "Krankheit / Burnout erklären", r: "ratgeber-krankheit.html",
+      bad: "Ich war länger krank, darüber spreche ich nicht so gern.", good: "Diese Zeit habe ich genutzt, um eine Situation vollständig auszukurieren; sie ist heute abgeschlossen, ich bin voll einsatzfähig." },
+    alter:           { s: "Ich bin unsicher wegen Alter oder Überqualifikation", u: "Alter / Überqualifikation", r: "ratgeber-erfahrung.html",
+      bad: "Ich weiss, mit über 50 hat man es schwerer.", good: "In den letzten Jahren habe ich [Ergebnis] erreicht – genau diese Erfahrung bringe ich dort ein, wo es zählt." },
+    ueberqualifikation:{ s: "Ich bin unsicher wegen Alter oder Überqualifikation", u: "Alter / Überqualifikation", r: "ratgeber-ueberqualifikation.html",
+      bad: "Überqualifiziert bin ich nicht, ich brauche einfach einen Job.", good: "Ich bringe bewusst Erfahrung über die Grundanforderung hinaus mit – und suche genau eine Rolle wie diese." },
+    einladungen:     { s: "Ich bekomme keine Einladungen", u: "Keine Einladungen", r: "ratgeber-einladungen.html",
+      bad: "Ich habe mich überall beworben und bekomme nur Absagen.", good: "Ich habe gemerkt, dass ich zu breit gestreut habe, und bewerbe mich jetzt gezielter dort, wo meine Stärke gefragt ist." },
+    lohn:            { s: "Anderes", u: "Lohnfrage", r: "ratgeber-lohnfrage.html",
+      bad: "Ich stelle mir ein fixes Gehalt vor und nenne direkt eine Zahl.", good: "Das hängt vom Zuschnitt der Rolle ab; auf Basis des Marktniveaus bewege ich mich in einer Spanne, die wir gern konkretisieren." },
+    konflikt:        { s: "Ich wurde gekündigt", u: "Anderes", r: "ratgeber-kuendigung.html",
+      bad: "Mit meinem alten Chef gab es massive Probleme.", good: "Am Ende gingen die Vorstellungen über die Zusammenarbeit auseinander; daraus achte ich heute früher auf das, was mir wichtig ist." },
+    branchenwechsel: { s: "Ich möchte mich neu orientieren", u: "Anderes", r: "ratgeber-strategie.html",
+      bad: "Ich möchte die Branche wechseln, weil mir die alte keinen Spass mehr macht.", good: "Was ich bisher entwickelt habe, ist genau das, was in der neuen Branche gebraucht wird – ein bewusster Übertrag, kein Bruch." },
+    betrieb:         { s: "Ich möchte mich neu orientieren", u: "Anderes", r: "ratgeber-tenure.html",
+      bad: "Ich war 20 Jahre dort, es war einfach Zeit für etwas Neues.", good: "In den Jahren habe ich mehrere Rollen mitgestaltet; jetzt suche ich bewusst ein Umfeld, in dem ich Neues lernen kann." },
+    anderes:         { s: "Anderes", u: "Selbstpräsentation", r: "ratgeber-selbstpraesentation.html",
+      bad: "", good: "" }
+  };
+
+  var answers = { anlass: null, thema: null, gefuehl: null, eigene: "" };
+  var scores = {};
+  var idx = 0;
+
+  var stage = document.getElementById('diagStage');
+  var bar = document.getElementById('diagBar');
+  var stepLabel = document.getElementById('diagStepLabel');
+  var live = document.getElementById('diagLive');
+
+  function addScore(w) { if (!w) return; for (var k in w) scores[k] = (scores[k] || 0) + w[k]; }
+
+  function renderLive() {
+    var parts = [];
+    if (answers.anlass) parts.push(answers.anlass.live + (answers.thema ? " – und " + answers.thema.live : "") + ".");
+    if (answers.gefuehl) parts.push(answers.gefuehl.live);
+    if (answers.eigene && answers.eigene.trim()) parts.push(answers.eigene.trim());
+    if (!parts.length) {
+      live.innerHTML = '<p class="diag-live-placeholder">Sobald Sie antworten, ordnet sich hier Ihr Anliegen – aus einem diffusen Gefühl wird ein klarer Satz.</p>';
+      return;
+    }
+    live.innerHTML = parts.map(function (p, i) {
+      return '<p class="diag-live-line" style="animation-delay:' + (i * 0.05) + 's">' + escapeHtml(p) + '</p>';
+    }).join('');
+  }
+
+  function escapeHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+  function setProgress() {
+    var pct = Math.round((idx) / STEPS.length * 100);
+    bar.style.width = pct + '%';
+    stepLabel.textContent = 'Schritt ' + Math.min(idx + 1, STEPS.length) + ' von ' + STEPS.length;
+  }
+
+  function transition(renderFn) {
+    if (reduce) { renderFn(); return; }
+    stage.classList.add('diag-out');
+    setTimeout(function () { renderFn(); stage.classList.remove('diag-out'); }, 160);
+  }
+
+  function renderStep() {
+    setProgress();
+    var step = STEPS[idx];
+    var html = '<div class="diag-card">';
+    html += '<h2 class="diag-q">' + escapeHtml(step.q) + '</h2>';
+    if (step.hint) html += '<p class="diag-hint">' + escapeHtml(step.hint) + '</p>';
+
+    if (step.free) {
+      html += '<textarea class="diag-textarea" id="diagFree" rows="4" placeholder="' + escapeHtml(step.placeholder || '') + '">' + escapeHtml(answers.eigene || '') + '</textarea>';
+      html += '<div class="diag-nav">';
+      html += '<button type="button" class="btn btn-secondary" data-back>Zurück</button>';
+      html += '<button type="button" class="btn btn-primary" data-finish>Meine Einschätzung ansehen →</button>';
+      html += '</div>';
+    } else {
+      html += '<div class="diag-options" role="listbox" aria-label="' + escapeHtml(step.q) + '">';
+      step.options.forEach(function (o, i) {
+        var sel = answers[step.key] && answers[step.key].v === o.v ? ' diag-selected' : '';
+        html += '<button type="button" class="diag-option' + sel + '" data-opt="' + i + '">' +
+                '<span class="diag-option-tick" aria-hidden="true"></span>' +
+                '<span>' + escapeHtml(o.label) + '</span></button>';
+      });
+      html += '</div>';
+      if (idx > 0) html += '<div class="diag-nav"><button type="button" class="btn btn-secondary" data-back>Zurück</button></div>';
+    }
+    html += '</div>';
+    stage.innerHTML = html;
+
+    // Events
+    if (step.free) {
+      var ta = document.getElementById('diagFree');
+      ta.addEventListener('input', function () { answers.eigene = ta.value; renderLive(); });
+      stage.querySelector('[data-finish]').addEventListener('click', finish);
+      stage.querySelector('[data-back]').addEventListener('click', back);
+      ta.focus();
+    } else {
+      stage.querySelectorAll('.diag-option').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var o = step.options[+btn.getAttribute('data-opt')];
+          // vorherige Auswahl dieses Schrittes zurückrechnen
+          if (answers[step.key]) addScoreNeg(answers[step.key].w);
+          answers[step.key] = o; addScore(o.w);
+          renderLive();
+          // kurze Bestätigung, dann weiter
+          stage.querySelectorAll('.diag-option').forEach(function (b) { b.classList.remove('diag-selected'); });
+          btn.classList.add('diag-selected');
+          setTimeout(next, reduce ? 0 : 220);
+        });
+      });
+      var b = stage.querySelector('[data-back]');
+      if (b) b.addEventListener('click', back);
+      var first = stage.querySelector('.diag-option');
+      if (first) first.focus();
+    }
+  }
+
+  function addScoreNeg(w) { if (!w) return; for (var k in w) scores[k] = (scores[k] || 0) - w[k]; }
+
+  function next() { if (idx < STEPS.length - 1) { idx++; transition(renderStep); } }
+  function back() { if (idx > 0) { idx--; transition(renderStep); } }
+
+  function topType() {
+    // Akutfall-Vorrang, wenn Gespräch bald ansteht
+    var best = 'vertrauen', bestVal = -1;
+    for (var k in scores) { if (scores[k] > bestVal) { bestVal = scores[k]; best = k; } }
+    return best;
+  }
+
+  function buildFormulation() {
+    var parts = [];
+    if (answers.anlass) parts.push(answers.anlass.live + (answers.thema ? " – und " + answers.thema.live : "") + ".");
+    if (answers.gefuehl) parts.push(answers.gefuehl.live);
+    if (answers.eigene && answers.eigene.trim()) parts.push(answers.eigene.trim());
+    return parts.join(' ');
+  }
+
+  function finish() {
+    setProgress();
+    bar.style.width = '100%';
+    stepLabel.textContent = 'Ihr Ergebnis';
+    var t = topType();
+    var type = TYPES[t] || TYPES.vertrauen;
+    var theme = answers.thema ? THEMES[answers.thema.v] : null;
+    var formulation = buildFormulation();
+
+    var html = '<div class="diag-result">';
+    html += '<p class="diag-result-eyebrow">Ihre Einordnung</p>';
+    html += '<h2 class="diag-result-title">' + escapeHtml(type.title) + '</h2>';
+    html += '<p class="diag-result-text">' + escapeHtml(type.text) + '</p>';
+
+    if (theme && theme.good) {
+      html += '<div class="diag-example">';
+      html += '<p class="diag-example-label">So könnte Ihre Antwort wirken</p>';
+      html += '<p class="diag-example-bad"><span>Unvorbereitet</span>„' + escapeHtml(theme.bad) + '“</p>';
+      html += '<p class="diag-example-good"><span>Geordnet</span>„' + escapeHtml(theme.good) + '“</p>';
+      html += '</div>';
+    }
+
+    html += '<div class="diag-formulation">';
+    html += '<p class="diag-formulation-label">Ihre Formulierung – bereit zum Weitergeben</p>';
+    html += '<textarea class="diag-textarea" id="diagResultText" rows="4">' + escapeHtml(formulation) + '</textarea>';
+    html += '<p class="diag-formulation-hint">Sie können den Text anpassen. Mit einem Klick übernehmen wir ihn in die kostenlose Ersteinschätzung – Sie müssen ihn nicht neu schreiben.</p>';
+    html += '</div>';
+
+    html += '<div class="diag-result-actions">';
+    html += '<a href="#" class="btn btn-primary" id="diagToForm">Kostenlose Ersteinschätzung – mit dieser Formulierung</a>';
+    if (theme) html += '<a href="' + theme.r + '" class="btn btn-secondary">Passenden Ratgeber lesen</a>';
+    html += '</div>';
+    html += '<p class="diag-result-reassure">Kostenlos &amp; unverbindlich · persönliche Antwort in 1–2 Werktagen · oder direkt anrufen: <a href="tel:+41795148276">+41&nbsp;79&nbsp;514&nbsp;82&nbsp;76</a></p>';
+    html += '<p class="diag-restart"><button type="button" class="diag-linkbtn" id="diagRestart">Von vorn beginnen</button></p>';
+    html += '</div>';
+    stage.innerHTML = html;
+
+    // Live-Panel spiegelt das Endergebnis
+    renderLive();
+
+    if (typeof gtag === 'function') { try { gtag('event', 'diagnose_abgeschlossen', { grundtyp: t }); } catch (e) {} }
+
+    var s = theme ? theme.s : 'Anderes';
+    var u = theme ? theme.u : 'Anderes';
+    document.getElementById('diagToForm').addEventListener('click', function (e) {
+      e.preventDefault();
+      var txt = document.getElementById('diagResultText').value;
+      var qs = 'd=' + encodeURIComponent(txt) + '&s=' + encodeURIComponent(s) + '&u=' + encodeURIComponent(u);
+      window.location.href = 'interview-check.html?' + qs;
+    });
+    document.getElementById('diagRestart').addEventListener('click', function () {
+      answers = { anlass: null, thema: null, gefuehl: null, eigene: "" }; scores = {}; idx = 0;
+      transition(function () { renderStep(); renderLive(); });
+    });
+    document.querySelector('.diag-result').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  // Start
+  renderStep();
+})();
+</script>
+</body>
+</html>
