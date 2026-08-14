@@ -1573,3 +1573,19 @@ h1 { letter-spacing: -0.018em; }
   .hero-brand { align-items: flex-start; gap: 0.65rem; }
   .hero-brand .hero-eyebrow { padding-top: 0.35rem; }
 }
+
+/* ============================================================
+   SOCIAL – Footer
+   ============================================================ */
+.footer-social { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; gap: 1rem; }
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--footer-link, rgba(255,255,255,0.72));
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer-social a:hover, .footer-social a:focus-visible { color: #fff; }
+.social-icon { flex-shrink: 0; }

@@ -41,6 +41,18 @@ const FOOTER_HTML = `
       <div class="footer-brand">
         <div class="footer-logo"><img src="assets/img/logo-vogel-weiss.png" alt="" width="600" height="600" class="footer-mark" aria-hidden="true"><span>AS-Bewerbung.ch</span></div>
         <p>Bewerbungsarchitekt für Menschen 40+ in der Schweiz. Online. Klar strukturiert.</p>
+        <ul class="footer-social" role="list">
+          <li>
+            <a href="https://www.instagram.com/as_bewerbung.ch/" target="_blank" rel="noopener">
+              <svg class="social-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                <circle cx="12" cy="12" r="4"></circle>
+                <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle>
+              </svg>
+              <span>Instagram</span>
+            </a>
+          </li>
+        </ul>
       </div>
       <div class="footer-col">
         <h4>Angebote</h4>
