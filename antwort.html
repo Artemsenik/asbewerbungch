@@ -46,7 +46,7 @@
   </div>
 </section>
 
-<section class="section" style="padding-top:1.4rem;padding-bottom:0;">
+<section class="section" style="padding-top:1.4rem;">
   <div class="container">
     <figure class="workspace-figure">
       <img src="assets/img/karten-ordnen-wide.webp" alt="Eine Hand ordnet einzelne Karten zu einer klaren Reihe – aus losen Gedanken wird Struktur" width="1536" height="1024" loading="lazy">
@@ -316,7 +316,16 @@
     document.querySelector('.diag-result').scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
   }
 
-  renderTopicSelect();
+  // Themen-Deeplink: antwort.html?t=kuendigung springt direkt in den Aufbau
+  var tParam = new URLSearchParams(window.location.search).get('t');
+  if (tParam && TOPICS[tParam]) {
+    topicKey = tParam;
+    idx = 1;
+    renderBuildStep();
+    renderLive();
+  } else {
+    renderTopicSelect();
+  }
 })();
 </script>
 </body>

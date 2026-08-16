@@ -323,12 +323,31 @@ document.addEventListener('DOMContentLoaded', function () {
           if (opt.value === u || opt.textContent.trim() === u) unsicherheitEl.value = opt.value || opt.textContent.trim();
         });
       }
-      var formCard = document.querySelector('.form-card');
-      if (formCard) {
+      // ============================================================
+      //  WORKBOOK-BESTELLUNG: Formularkontext anpassen
+      //  Wenn via Workbook-Bestelllink mit Bestelltext im d-Parameter
+      // ============================================================
+      if (d && d.indexOf('Workbook') !== -1 && d.indexOf('bestellen') !== -1) {
+        var formCard = document.querySelector('.form-card');
+        if (formCard) {
+          var h3 = formCard.querySelector('h3');
+          if (h3) h3.textContent = 'Workbook bestellen – 49 CHF';
+          var intro = formCard.querySelectorAll('.form-intro');
+          if (intro[0]) intro[0].textContent = 'Hinterlassen Sie Ihren Namen und Ihre E-Mail-Adresse. Artem sendet Ihnen die Zahlungsangaben (TWINT oder Rechnung) – danach erhalten Sie das PDF in der Regel noch am selben Werktag.';
+          if (intro[1]) intro[1].style.display = 'none';
+          var submit = formCard.querySelector('.form-submit');
+          if (submit) submit.textContent = 'Workbook bestellen';
+          var subjectInput = formCard.querySelector('input[name="_subject"]');
+          if (subjectInput) subjectInput.value = 'Workbook-Bestellung – AS-Bewerbung.ch';
+        }
+      }
+      var scrollTarget = document.querySelector('.form-card');
+      if (scrollTarget) {
         window.requestAnimationFrame(function () {
-          formCard.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+          scrollTarget.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
         });
       }
+
     }
   }
 

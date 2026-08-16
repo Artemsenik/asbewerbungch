@@ -1515,6 +1515,7 @@ h1 { letter-spacing: -0.018em; }
   font-size: 1.05rem;
   line-height: 1.35;
   font-weight: 600;
+  font-family: var(--font-body);
   margin: 0;
 }
 .need-item p {
@@ -1589,3 +1590,19 @@ h1 { letter-spacing: -0.018em; }
 }
 .footer-social a:hover, .footer-social a:focus-visible { color: #fff; }
 .social-icon { flex-shrink: 0; }
+
+.value-item h3 { font-family: var(--font-body); }
+
+/* decide-price--soon: gedämpfte Darstellung für noch nicht buchbare Produkte */
+.decide-price--soon { color: var(--text-muted); font-style: italic; }
+
+/* Sekundäre CTA in der dunklen Artikel-CTA-Box (niedrigschwelliger zweiter Weg) */
+.btn-ghost-light {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.38);
+}
+.btn-ghost-light:hover, .btn-ghost-light:focus-visible {
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.65);
+}
