@@ -72,7 +72,7 @@
     </div>
     <noscript>
       <p style="margin-top:1.5rem;">Für die Antwort-Werkstatt ist JavaScript nötig. Sie können Ihre Situation auch direkt in der
-        <a href="interview-check.html">kostenlosen Ersteinschätzung</a> schildern.</p>
+        <a href="interview-check.html">kostenlosen Klarheitsgespräch</a> schildern.</p>
     </noscript>
   </div>
 </section>
@@ -278,13 +278,13 @@
       html += '<div class="diag-formulation">';
       html += '<p class="diag-formulation-label">In Ihren Worten – zum Anpassen und Behalten</p>';
       html += '<textarea class="diag-textarea" id="awResultText" rows="5">'+esc(full)+'</textarea>';
-      html += '<p class="diag-formulation-hint">Ein Entwurf ist der erste Schritt – ob er ruhig und glaubwürdig klingt, zeigt sich im Sprechen. Genau das prüfen wir in der kostenlosen Ersteinschätzung.</p>';
+      html += '<p class="diag-formulation-hint">Ein Entwurf ist der erste Schritt – ob er ruhig und glaubwürdig klingt, zeigt sich im Sprechen. Genau das prüfen wir in der kostenlosen Klarheitsgespräch.</p>';
       html += '</div>';
     } else {
       html += '<p class="diag-result-text">Sie haben noch keinen eigenen Satz formuliert. Gehen Sie zurück und beginnen Sie mit Schritt 1 – die Leitplanken helfen.</p>';
     }
     html += '<div class="diag-result-actions">';
-    if (full) html += '<a href="#" class="btn btn-primary" id="awToForm">Diese Antwort kostenlos prüfen lassen</a>';
+    if (full) html += '<a href="#" class="btn btn-primary" id="awToForm" data-cta="interview">Im Interview-Training vertiefen</a>';
     html += '<a href="'+t.r+'" class="btn btn-secondary">Passenden Ratgeber lesen</a>';
     if (full) html += '<button type="button" class="btn btn-secondary" id="awCopy">Antwort kopieren</button>';
     html += '</div>';
@@ -301,7 +301,7 @@
       e.preventDefault();
       var txt = document.getElementById('awResultText').value;
       var d = 'Meine Antwort auf «'+t.label+'»: '+txt;
-      window.location.href = 'interview-check.html?d='+encodeURIComponent(d)+'&s='+encodeURIComponent(t.s)+'&u='+encodeURIComponent(t.u);
+      window.location.href = 'interview-check.html?a=interview&d='+encodeURIComponent(d);
     });
     var copyBtn = document.getElementById('awCopy');
     if (copyBtn) copyBtn.addEventListener('click', function(){

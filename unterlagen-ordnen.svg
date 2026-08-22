@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270" role="img" aria-label="Aus losen Notizen wird ein geordnetes Bewerbungsdossier" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="bgU" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#F2F0E9"/><stop offset="1" stop-color="#E8E5DC"/></linearGradient></defs>
+<rect width="480" height="270" fill="url(#bgU)"/>
+
+<!-- linke Seite: lose, schiefe Fragmente (Lehm) -->
+<g stroke="#9A5B3F" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.85">
+  <g transform="rotate(-9 96 92)">
+    <rect x="62" y="64" width="68" height="46" rx="3" stroke-width="1.6" opacity="0.6"/>
+    <line x1="72" y1="80" x2="118" y2="80"/>
+    <line x1="72" y1="92" x2="104" y2="92"/>
+  </g>
+  <g transform="rotate(7 104 168)">
+    <rect x="68" y="140" width="72" height="50" rx="3" stroke-width="1.6" opacity="0.6"/>
+    <line x1="78" y1="158" x2="128" y2="158"/>
+    <line x1="78" y1="170" x2="110" y2="170"/>
+  </g>
+  <g transform="rotate(-4 118 224)">
+    <line x1="80" y1="222" x2="150" y2="222"/>
+    <line x1="80" y1="234" x2="122" y2="234"/>
+  </g>
+</g>
+
+<!-- Übergangslinie -->
+<g fill="none" stroke="#143F3C" stroke-width="2.4" stroke-linecap="round">
+  <line x1="176" y1="135" x2="248" y2="135"/>
+  <path d="M240 128 L249 135 L240 142"/>
+</g>
+
+<!-- rechte Seite: geordnetes Dossier (Petrol) -->
+<g fill="none" stroke="#143F3C" stroke-linecap="round">
+  <rect x="286" y="52" width="132" height="166" rx="5" stroke-width="2" fill="#FBFAF7"/>
+  <!-- Kopfbereich -->
+  <line x1="304" y1="76" x2="366" y2="76" stroke-width="3.2"/>
+  <line x1="304" y1="88" x2="344" y2="88" stroke-width="2" stroke="#6B6B63"/>
+  <line x1="304" y1="104" x2="400" y2="104" stroke-width="1.2" stroke="#CBC5B7"/>
+  <!-- geordnete Abschnitte -->
+  <g stroke-width="2">
+    <circle cx="306" cy="122" r="2.6" fill="#143F3C" stroke="none"/>
+    <line x1="316" y1="122" x2="400" y2="122"/>
+    <line x1="316" y1="134" x2="378" y2="134" stroke="#8C877C" stroke-width="1.6"/>
+    <circle cx="306" cy="154" r="2.6" fill="#143F3C" stroke="none"/>
+    <line x1="316" y1="154" x2="400" y2="154"/>
+    <line x1="316" y1="166" x2="372" y2="166" stroke="#8C877C" stroke-width="1.6"/>
+    <circle cx="306" cy="186" r="2.6" fill="#143F3C" stroke="none"/>
+    <line x1="316" y1="186" x2="396" y2="186"/>
+    <line x1="316" y1="198" x2="360" y2="198" stroke="#8C877C" stroke-width="1.6"/>
+  </g>
+</g>
+<!-- Akzentkante -->
+<line x1="286" y1="52" x2="286" y2="218" stroke="#143F3C" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

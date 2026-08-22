@@ -5,7 +5,7 @@
   <script>document.documentElement.classList.add("js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anfrage erhalten | AS-Bewerbung.ch</title>
-  <meta name="description" content="Ihre Anfrage für den kostenlosen Interview-Check ist angekommen. Artem Senik meldet sich persönlich in 1–2 Werktagen.">
+  <meta name="description" content="Ihre Anfrage für den kostenlose Klarheitsgespräch ist angekommen. Artem Senik meldet sich persönlich in 1–2 Werktagen.">
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://www.as-bewerbung.ch/danke.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,6 +31,12 @@
             'value':    50.00,
             'currency': 'CHF'
           });
+          // Zusätzliches, nicht als Conversion gewertetes Ereignis: welche Anfrageart
+          // wurde tatsächlich abgeschickt? Erst hier – nach bestätigter Übermittlung.
+          var art = params.get('art');
+          if (art === 'basis')          gtag('event', 'basis_form_submit');
+          else if (art === 'interview') gtag('event', 'interview_form_submit');
+          else                          gtag('event', 'clarity_booking_complete');
           // Parameter entfernen, damit ein Reload keine zweite Conversion auslöst
           if (window.history && window.history.replaceState) {
             window.history.replaceState({}, document.title, 'danke.html');
