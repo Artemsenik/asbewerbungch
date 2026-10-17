@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/spezialisten.css">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_CH">
   <meta property="og:site_name" content="AS-Bewerbung.ch">
@@ -42,7 +43,7 @@
   <div class="container">
     <div class="tag">Antwort-Werkstatt · kostenlos</div>
     <h1>Ihre Antwort in drei Schritten</h1>
-    <p class="article-lead">Sie wissen, welche Frage Sie fürchten. Hier bauen Sie Ihre Antwort darauf – Schritt für Schritt, in Ihren eigenen Worten, mit einem Beispiel als Leitplanke. Am Ende haben Sie einen Entwurf, den Sie behalten oder kostenlos prüfen lassen können. Lieber offline und für alle sieben Fragen? Das <a href="workbook.html">Workbook zum Ausfüllen</a> gibt es als PDF.</p>
+    <p class="article-lead">Wählen Sie Ihre Frage. Formulieren Sie Ihre Antwort in drei Schritten. Kopieren Sie den Entwurf und üben Sie ihn laut. Lieber offline arbeiten? Das <a href="workbook.html">Workbook für CHF 49</a> gibt es als PDF zum Ausfüllen.</p>
   </div>
 </section>
 
@@ -71,7 +72,7 @@
       </aside>
     </div>
     <noscript>
-      <p style="margin-top:1.5rem;">Für die Antwort-Werkstatt ist JavaScript nötig. Sie können Ihre Situation auch direkt in der
+      <p style="margin-top:1.5rem;">Für die Antwort-Werkstatt ist JavaScript nötig. Sie können Ihre Situation auch direkt im
         <a href="interview-check.html">kostenlosen Klarheitsgespräch</a> schildern.</p>
     </noscript>
   </div>
@@ -278,7 +279,7 @@
       html += '<div class="diag-formulation">';
       html += '<p class="diag-formulation-label">In Ihren Worten – zum Anpassen und Behalten</p>';
       html += '<textarea class="diag-textarea" id="awResultText" rows="5">'+esc(full)+'</textarea>';
-      html += '<p class="diag-formulation-hint">Ein Entwurf ist der erste Schritt – ob er ruhig und glaubwürdig klingt, zeigt sich im Sprechen. Genau das prüfen wir in der kostenlosen Klarheitsgespräch.</p>';
+      html += '<p class="diag-formulation-hint">Lesen Sie Ihren Entwurf laut. Klingt er nach Ihnen, und wird Ihr nächster beruflicher Schritt klar? Im persönlichen Interview-Training können Sie die Antwort weiter üben.</p>';
       html += '</div>';
     } else {
       html += '<p class="diag-result-text">Sie haben noch keinen eigenen Satz formuliert. Gehen Sie zurück und beginnen Sie mit Schritt 1 – die Leitplanken helfen.</p>';
@@ -288,7 +289,7 @@
     html += '<a href="'+t.r+'" class="btn btn-secondary">Passenden Ratgeber lesen</a>';
     if (full) html += '<button type="button" class="btn btn-secondary" id="awCopy">Antwort kopieren</button>';
     html += '</div>';
-    html += '<p class="diag-result-reassure">Kostenlos &amp; unverbindlich · persönliche Antwort in 1–2 Werktagen · oder direkt anrufen: <a href="tel:+41795148276">+41&nbsp;79&nbsp;514&nbsp;82&nbsp;76</a></p>';
+    html += '<p class="diag-result-reassure">Diese Werkstatt ist kostenlos. Das persönliche Interview-Training kostet CHF 240 für 75 Minuten. Fragen? <a href="tel:+41795148276">+41&nbsp;79&nbsp;514&nbsp;82&nbsp;76</a></p>';
     html += '<p class="diag-restart"><button type="button" class="diag-linkbtn" id="awRestart">Andere Frage wählen</button></p>';
     html += '</div>';
     stage.innerHTML = html;
@@ -304,12 +305,34 @@
       window.location.href = 'interview-check.html?a=interview&d='+encodeURIComponent(d);
     });
     var copyBtn = document.getElementById('awCopy');
-    if (copyBtn) copyBtn.addEventListener('click', function(){
-      var txt = document.getElementById('awResultText').value;
-      function done(){ copyBtn.textContent='Kopiert ✓'; setTimeout(function(){copyBtn.textContent='Antwort kopieren';},1800); }
-      if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, done); }
-      else { var ta=document.getElementById('awResultText'); ta.select(); try{document.execCommand('copy');}catch(e){} done(); }
-    });
+    if (copyBtn) {
+      var copyStatus = document.createElement('p');
+      copyStatus.className = 'diag-formulation-hint';
+      copyStatus.setAttribute('role', 'status');
+      copyStatus.setAttribute('aria-live', 'polite');
+      copyBtn.parentElement.insertAdjacentElement('afterend', copyStatus);
+      copyBtn.addEventListener('click', function(){
+        var ta = document.getElementById('awResultText');
+        var txt = ta.value;
+        function done(){
+          copyStatus.textContent = 'Ihre Antwort wurde kopiert.';
+          copyBtn.textContent = 'Kopiert';
+          setTimeout(function(){ copyBtn.textContent = 'Antwort kopieren'; },1800);
+        }
+        function fallback(){
+          ta.focus();
+          ta.select();
+          ta.setSelectionRange(0, ta.value.length);
+          var copied = false;
+          try { copied = document.execCommand('copy'); } catch(e) {}
+          if (copied) done();
+          else copyStatus.textContent = 'Automatisches Kopieren ist hier nicht möglich. Ihre Antwort ist markiert; kopieren Sie sie bitte über das Menü Ihres Geräts.';
+        }
+        copyStatus.textContent = '';
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fallback);
+        else fallback();
+      });
+    }
     document.getElementById('awRestart').addEventListener('click', function(){
       idx = 0; transition(function(){ renderTopicSelect(); renderLive(); });
     });
