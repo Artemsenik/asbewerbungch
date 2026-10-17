@@ -1,0 +1,276 @@
+/* Praxis & Ratgeber: kurzer Einstieg, direkt nutzbares Werkzeug,
+   danach alle bestehenden Artikel nach Anliegen geordnet. */
+
+.praxis-hero {
+  padding-block: clamp(2rem, 4vw, 3rem) 0;
+}
+
+.praxis-heading {
+  margin-bottom: 2.25rem;
+}
+
+.praxis-heading h1 {
+  max-width: 24ch;
+  margin-bottom: 1rem;
+}
+
+.praxis-heading > p:last-child {
+  max-width: 55ch;
+  font-size: 1.05rem;
+}
+
+.praxis-workshop {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  color: #e1eae5;
+  background: var(--accent);
+  border-radius: var(--radius-lg);
+}
+
+.praxis-label {
+  margin-bottom: 0.85rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.praxis-workshop h2 {
+  margin-bottom: 1rem;
+  color: #fff;
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+}
+
+.praxis-workshop-content > p:not(.praxis-label) {
+  max-width: 41ch;
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.praxis-workshop .btn {
+  margin-top: 1.5rem;
+}
+
+.praxis-workshop a:focus-visible {
+  outline-color: #fff;
+  outline-offset: 5px;
+}
+
+.praxis-workshop-outline {
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  padding-left: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.praxis-prompts {
+  list-style: none;
+  counter-reset: prompt;
+}
+
+.praxis-prompts li {
+  display: flex;
+  gap: 0.9rem;
+  align-items: baseline;
+  padding-block: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  counter-increment: prompt;
+}
+
+.praxis-prompts li + li {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.praxis-prompts li::before {
+  content: counter(prompt, decimal-leading-zero);
+  flex-shrink: 0;
+  color: #bcd1c8;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.praxis-workshop-note {
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.praxis-topics {
+  padding-block: clamp(3rem, 6vw, 4.5rem) 0;
+}
+
+.praxis-section-heading {
+  margin-bottom: 2rem;
+}
+
+.praxis-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.praxis-topic {
+  min-width: 0;
+  border-top: 2px solid var(--accent-line);
+  padding-top: 1.25rem;
+}
+
+.praxis-topic h3 {
+  min-height: 2.5em;
+  margin-bottom: 1rem;
+  max-width: 23ch;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
+.praxis-topic-links li {
+  border-top: 1px solid var(--border);
+}
+
+.praxis-topic-links a {
+  display: flex;
+  align-items: center;
+  min-height: 4.35rem;
+  padding: 0.9rem 0.1rem;
+  color: var(--accent);
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.55;
+  text-underline-offset: 0.22em;
+  transition: color 0.15s, background 0.15s;
+}
+
+.praxis-topic-links a:hover {
+  color: var(--accent-deep);
+  background: var(--accent-tint);
+  text-decoration: underline;
+}
+
+.praxis-topic-links a:focus-visible {
+  outline-offset: 3px;
+}
+
+.praxis-more {
+  padding-block: clamp(3rem, 5vw, 4rem);
+}
+
+.praxis-workbook {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 2rem;
+  background: var(--paper-2);
+}
+
+.praxis-workbook .praxis-label {
+  margin-bottom: 0.5rem;
+  color: var(--text-body);
+}
+
+.praxis-workbook h2 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin-bottom: 0.45rem;
+}
+
+.praxis-workbook-copy > p:last-child {
+  font-size: 0.88rem;
+}
+
+.praxis-workbook-action {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 1.5rem;
+}
+
+.praxis-workbook-action strong {
+  white-space: nowrap;
+  font-size: 1.1rem;
+}
+
+.praxis-contact {
+  margin-top: 1.5rem;
+  max-width: none;
+  text-align: center;
+  font-size: 0.82rem;
+}
+
+.praxis-contact a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+@media (max-width: 900px) {
+  .praxis-workbook-action {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .praxis-workshop,
+  .praxis-topic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .praxis-heading {
+    margin-bottom: 1.75rem;
+  }
+
+  .praxis-workshop {
+    gap: 1.75rem;
+  }
+
+  .praxis-workshop-outline {
+    padding-left: 0;
+    padding-top: 1.5rem;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .praxis-workshop .btn {
+    width: 100%;
+  }
+
+  .praxis-topic-grid {
+    gap: 2rem;
+  }
+
+  .praxis-topic h3 {
+    min-height: 0;
+  }
+
+  .praxis-topic-links a {
+    min-height: 3.5rem;
+  }
+
+  .praxis-workbook {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .praxis-workbook-action {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .praxis-topic-links a {
+    transition: none;
+  }
+}

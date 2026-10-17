@@ -8,24 +8,95 @@ document.addEventListener('DOMContentLoaded', function () {
   const mobileClose = document.getElementById('mobile-close');
 
   if (toggle && mobileMenu) {
-    toggle.addEventListener('click', () => {
+    let lastFocus = null;
+    let previousOverflow = '';
+    let inertBackground = [];
+
+    const focusableElements = () => Array.from(mobileMenu.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )).filter(el => !el.closest('[inert]') && el.getClientRects().length > 0);
+
+    function openMenu() {
+      if (!mobileMenu.hidden) return;
+      lastFocus = document.activeElement;
+      previousOverflow = document.body.style.overflow;
+      mobileMenu.hidden = false;
+      mobileMenu.inert = false;
+      mobileMenu.setAttribute('aria-hidden', 'false');
       mobileMenu.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Menü schliessen');
       document.body.style.overflow = 'hidden';
-    });
-  }
-  if (mobileClose && mobileMenu) {
-    mobileClose.addEventListener('click', () => {
+      (mobileClose || mobileMenu).focus();
+
+      // Nur den Dialog erreichbar lassen; bestehende inert-Zustände erhalten.
+      let branch = mobileMenu;
+      while (branch.parentElement && branch !== document.body) {
+        Array.from(branch.parentElement.children).forEach(sibling => {
+          if (sibling !== branch && !sibling.hasAttribute('inert')) {
+            sibling.inert = true;
+            inertBackground.push(sibling);
+          }
+        });
+        branch = branch.parentElement;
+      }
+    }
+
+    function closeMenu() {
+      if (mobileMenu.hidden) return;
       mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
+      mobileMenu.hidden = true;
+      mobileMenu.inert = true;
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Menü öffnen');
+      document.body.style.overflow = previousOverflow;
+      inertBackground.forEach(el => { el.inert = false; });
+      inertBackground = [];
+      const returnTarget = lastFocus && lastFocus.isConnected && lastFocus.getClientRects().length
+        ? lastFocus : document.querySelector('.site-nav .nav-logo');
+      if (returnTarget) returnTarget.focus();
+    }
+
+    toggle.addEventListener('click', () => mobileMenu.hidden ? openMenu() : closeMenu());
+    if (mobileClose) mobileClose.addEventListener('click', closeMenu);
+    // Auch Logo und Kontakt-Button schliessen das Menü.
+    mobileMenu.querySelectorAll('a[href]').forEach(link => link.addEventListener('click', closeMenu));
+
+    document.addEventListener('keydown', event => {
+      if (mobileMenu.hidden) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeMenu();
+      } else if (event.key === 'Tab') {
+        const items = focusableElements();
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (!first) {
+          event.preventDefault();
+          mobileMenu.focus();
+        } else if (event.shiftKey && (document.activeElement === first || !mobileMenu.contains(document.activeElement))) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && (document.activeElement === last || !mobileMenu.contains(document.activeElement))) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    document.addEventListener('focusin', event => {
+      if (!mobileMenu.hidden && !mobileMenu.contains(event.target)) {
+        (mobileClose || mobileMenu).focus();
+      }
+    });
+
+    // Beim Wechsel zur Desktopnavigation keinen unsichtbaren Dialog offenlassen.
+    const desktopNavigation = window.matchMedia('(min-width: 769px)');
+    desktopNavigation.addEventListener('change', event => {
+      if (event.matches) closeMenu();
     });
   }
-  // Menü schliessen bei Link-Klick
-  document.querySelectorAll('.mobile-menu nav a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu && mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
 
   // --- FAQ Accordion ---
   document.querySelectorAll('.faq-question').forEach(btn => {
@@ -90,7 +161,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a, .mobile-menu nav a').forEach(link => {
     const href = link.getAttribute('href');
-    if (href === currentPage) link.classList.add('active');
+    if (href === currentPage) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+    }
     if (currentPage === '' || currentPage === 'index.html') {
       if (href === 'index.html' || href === './') link.classList.add('active');
     }
@@ -99,10 +173,19 @@ document.addEventListener('DOMContentLoaded', function () {
   // --- Smooth scroll für Anker-Links ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-      const target = document.querySelector(this.getAttribute('href'));
+      const fragment = this.getAttribute('href');
+      if (!fragment || fragment === '#') return;
+      const target = document.getElementById(fragment.slice(1));
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.location.hash !== fragment) window.history.pushState(null, '', fragment);
+        const temporaryTabIndex = !target.hasAttribute('tabindex');
+        if (temporaryTabIndex) target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+        if (temporaryTabIndex) {
+          target.addEventListener('blur', function () { target.removeAttribute('tabindex'); }, { once: true });
+        }
+        target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
       }
     });
   });
@@ -300,8 +383,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ============================================================
-  //  DIAGNOSE-HANDOFF – prefillt das Formular auf interview-check.html
-  //  aus den URL-Parametern d (Beschreibung), s (Situation), u (Unsicherheit)
+  //  ANFRAGE-HANDOFF – Angebot und vorhandene Beschreibung übernehmen.
+  //  a ist eine feste Angebotsauswahl; d/s/u bleiben als bestehende Übergabe erhalten.
   // ============================================================
   var beschreibungEl = document.getElementById('beschreibung');
   if (beschreibungEl) {
@@ -309,6 +392,48 @@ document.addEventListener('DOMContentLoaded', function () {
     var d = params.get('d');
     var s = params.get('s');
     var u = params.get('u');
+    var requestedOfferKey = params.get('a');
+    var allowedOffers = {
+      interview: {
+        name: 'Interview-Training 40+',
+        price: 'CHF 240',
+        situation: 'Interview steht fest',
+        intro: 'Schildern Sie kurz Ihre Situation und die Zielstelle. Artem meldet sich persönlich, um Umfang und Termin mit Ihnen abzustimmen.',
+        button: 'Interview-Training anfragen'
+      },
+      basis: {
+        name: 'Bewerbungsbasis 40+',
+        price: 'CHF 690',
+        situation: 'Ich benötige Bewerbungsunterlagen',
+        intro: 'Schildern Sie kurz Ihre Zielrolle und Ihre Ausgangslage. Artem meldet sich persönlich, um den Umfang und die benötigten Unterlagen mit Ihnen abzustimmen.',
+        button: 'Bewerbungsbasis anfragen'
+      }
+    };
+    var requestedOffer = Object.prototype.hasOwnProperty.call(allowedOffers, requestedOfferKey)
+      ? allowedOffers[requestedOfferKey] : null;
+    var inquiryCard = document.querySelector('.form-card');
+    var inquirySituation = document.getElementById('anliegen');
+    if (requestedOffer && inquiryCard) {
+      var offerSummary = document.getElementById('angebot-summary');
+      var offerContext = document.getElementById('angebot-context');
+      var offerField = document.getElementById('angebot');
+      var offerLabel = requestedOffer.name + ' · ' + requestedOffer.price;
+      if (offerSummary) offerSummary.textContent = offerLabel;
+      if (offerContext) offerContext.hidden = false;
+      if (offerField) {
+        offerField.value = offerLabel;
+        offerField.disabled = false;
+      }
+      var inquiryHeading = inquiryCard.querySelector('h3');
+      if (inquiryHeading) inquiryHeading.textContent = requestedOffer.name + ' anfragen';
+      var inquiryIntro = inquiryCard.querySelector('.form-intro');
+      if (inquiryIntro) inquiryIntro.textContent = requestedOffer.intro;
+      var inquiryButton = inquiryCard.querySelector('.form-submit');
+      if (inquiryButton) inquiryButton.textContent = requestedOffer.button;
+      var inquirySubject = inquiryCard.querySelector('input[name="_subject"]');
+      if (inquirySubject) inquirySubject.value = requestedOffer.name + ' – Anfrage über AS-Bewerbung.ch';
+      if (inquirySituation && !inquirySituation.value) inquirySituation.value = requestedOffer.situation;
+    }
     if (d || s || u) {
       if (d) beschreibungEl.value = d;
       var situationEl = document.getElementById('situation');
@@ -327,7 +452,7 @@ document.addEventListener('DOMContentLoaded', function () {
       //  WORKBOOK-BESTELLUNG: Formularkontext anpassen
       //  Wenn via Workbook-Bestelllink mit Bestelltext im d-Parameter
       // ============================================================
-      if (d && d.indexOf('Workbook') !== -1 && d.indexOf('bestellen') !== -1) {
+      if (!requestedOffer && d && d.indexOf('Workbook') !== -1 && d.indexOf('bestellen') !== -1) {
         var formCard = document.querySelector('.form-card');
         if (formCard) {
           var h3 = formCard.querySelector('h3');
@@ -341,13 +466,31 @@ document.addEventListener('DOMContentLoaded', function () {
           if (subjectInput) subjectInput.value = 'Workbook-Bestellung – AS-Bewerbung.ch';
         }
       }
-      var scrollTarget = document.querySelector('.form-card');
+    }
+
+    // Sichtbare Formularzustände auch nach einer Vorauswahl aktuell halten.
+    var dateField = document.getElementById('datumFeld');
+    if (inquirySituation && dateField) {
+      var updateDateField = function () {
+        dateField.hidden = inquirySituation.value !== 'Interview steht fest';
+      };
+      inquirySituation.addEventListener('change', updateDateField);
+      updateDateField();
+    }
+    var descriptionCount = document.getElementById('beschreibungCount');
+    if (descriptionCount) {
+      var updateDescriptionCount = function () { descriptionCount.textContent = beschreibungEl.value.length; };
+      beschreibungEl.addEventListener('input', updateDescriptionCount);
+      updateDescriptionCount();
+    }
+
+    if (requestedOffer || d || s || u) {
+      var scrollTarget = inquiryCard;
       if (scrollTarget) {
         window.requestAnimationFrame(function () {
           scrollTarget.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
         });
       }
-
     }
   }
 

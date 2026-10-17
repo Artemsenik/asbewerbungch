@@ -113,6 +113,12 @@
           <p class="form-intro">In 15 Minuten klären wir, wobei Sie gerade Unterstützung brauchen und ob eines der Angebote zu Ihrer Situation passt. Sie erhalten eine ehrliche Einordnung, aber noch keine vollständige Dokumenten- oder Interviewanalyse.</p>
           <form id="interview-check-form" action="https://formspree.io/f/mqevajje" method="POST">
             <input type="hidden" name="_subject" value="Klarheitsgespräch – Anfrage über AS-Bewerbung.ch">
+            <input type="hidden" id="angebot" name="angebot" disabled>
+
+            <div class="form-field" id="angebot-context" hidden>
+              <p>Ihre Angebotsanfrage:<br><strong id="angebot-summary"></strong></p>
+              <p class="text-muted" style="font-size:0.82rem;margin-top:0.4rem;">Unverbindliche Anfrage. Umfang und Termin stimmen wir zuerst persönlich ab.</p>
+            </div>
 
             <div class="form-field">
               <label for="name">Name</label>
@@ -134,6 +140,7 @@
               <select id="anliegen" name="anliegen" required>
                 <option value="">Bitte wählen</option>
                 <option value="Interview steht fest">Interview steht fest</option>
+                <option value="Ich benötige Bewerbungsunterlagen">Ich benötige Bewerbungsunterlagen</option>
                 <option value="Ich erhalte keine Einladungen">Ich erhalte keine Einladungen</option>
                 <option value="Noch unklar">Noch unklar</option>
               </select>
