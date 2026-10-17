@@ -1,0 +1,108 @@
+/* Fachbereiche: schnell wählen, konkrete Belege finden, bei Bedarf vertiefen. */
+.fach-page { --fach-muted: #62645c; scroll-margin-top: 6rem; }
+.fach-skip { position: fixed; top: .5rem; left: .5rem; z-index: 400; padding: .7rem 1rem; background: var(--accent); color: #fff; transform: translateY(-160%); }
+.fach-skip:focus { transform: translateY(0); }
+.fach-fallback { display: flex; flex-wrap: wrap; gap: 1rem; padding-block: 1rem; }
+.fach-hero { padding-block: clamp(2rem, 4.5vw, 3.5rem) clamp(2.5rem, 5vw, 4rem); }
+.fach-back { display: inline-block; margin-bottom: 1.5rem; color: var(--fach-muted); font-size: .8rem; text-decoration: underline; text-underline-offset: .2em; }
+.fach-eyebrow { margin-bottom: .9rem; color: var(--accent); font-family: var(--font-body); font-size: .72rem; font-weight: 600; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
+.fach-hero h1 { max-width: 27ch; margin-bottom: 1.3rem; font-size: clamp(2.1rem, 4.1vw, 3.3rem); line-height: 1.13; }
+.fach-hero h1 em { color: var(--accent); font-weight: 400; }
+.fach-intro { max-width: 63ch; font-size: 1.02rem; line-height: 1.75; }
+.fach-jumps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 2rem; border-top: 1px solid var(--border); border-left: 1px solid var(--border); border-radius: 7px; overflow: hidden; background: var(--paper-2); }
+.fach-jumps a { display: flex; gap: .8rem; min-width: 0; padding: 1.25rem 1.2rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background .15s; }
+.fach-jumps a:hover { background: var(--accent-tint); }
+.fach-jumps a:focus-visible { position: relative; outline-offset: -4px; }
+.fach-jumps a > span:last-child { min-width: 0; }
+.fach-jump-number { padding-top: .1rem; color: var(--fach-muted); font-size: .68rem; font-variant-numeric: tabular-nums; }
+.fach-jumps strong { display: block; color: var(--accent); font-size: .9rem; line-height: 1.5; font-weight: 600; }
+.fach-jumps small { display: block; margin-top: .3rem; color: var(--fach-muted); font-size: .75rem; line-height: 1.5; }
+.fach-orientation { max-width: none; margin-top: 1rem; color: var(--fach-muted); font-size: .81rem; line-height: 1.65; }
+.fach-sections { padding-bottom: 1rem; }
+.fach-section { padding-block: 2.4rem 2.7rem; border-top: 1px solid var(--border); scroll-margin-top: 6rem; }
+.fach-section:target { border-top-color: var(--accent); }
+.fach-section-head { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 1rem; align-items: start; margin-bottom: 1.7rem; }
+.fach-section-number { color: var(--accent); font-size: .74rem; font-weight: 500; font-variant-numeric: tabular-nums; padding-top: .5rem; }
+.fach-section h2 { font-size: clamp(1.6rem, 2.75vw, 2.1rem); line-height: 1.2; }
+.fach-roles { max-width: none; margin-top: .55rem; font-size: .81rem; line-height: 1.6; color: var(--fach-muted); }
+.fach-content { display: grid; grid-template-columns: 1.18fr 1fr; gap: clamp(1.8rem, 4vw, 3.5rem); padding-left: 3.5rem; }
+.fach-content h3 { margin-bottom: .75rem; color: var(--accent); font-family: var(--font-body); font-size: .8rem; font-weight: 600; line-height: 1.5; }
+.fach-evidence ul { display: grid; gap: .5rem; padding-left: 1.05rem; list-style: disc; }
+.fach-evidence li { font-size: .87rem; line-height: 1.6; padding-left: .12rem; }
+.fach-evidence li::marker { color: #6f8e82; font-size: .7em; }
+.fach-questions { padding-left: 1.7rem; border-left: 1px solid var(--border); }
+.fach-questions ol { display: grid; gap: .85rem; padding-left: 1.1rem; }
+.fach-questions li { padding-left: .3rem; color: var(--accent); font-size: .9rem; line-height: 1.65; }
+.fach-questions li::marker { font-size: .76rem; font-variant-numeric: tabular-nums; }
+.fach-example { margin-top: 1.6rem; margin-left: 3.5rem; background: var(--paper-2); border: 1px solid var(--border); border-radius: 5px; }
+.fach-example summary { cursor: pointer; padding: 1rem 1.25rem; font-size: .88rem; line-height: 1.7; color: var(--accent); }
+.fach-example summary::marker { color: #57776d; }
+.fach-example summary > span { margin-right: .85rem; color: var(--fach-muted); font-size: .74rem; }
+.fach-example summary:hover { background: var(--accent-tint); }
+.fach-example summary:focus-visible { outline-offset: 3px; }
+.fach-example[open] summary { border-bottom: 1px solid var(--border); }
+.fach-example-content { padding: 1.25rem 1.5rem 1.4rem; }
+.fach-example blockquote { max-width: 76ch; margin: 0; color: var(--accent); font-family: var(--font-display); font-size: 1.17rem; line-height: 1.65; }
+.fach-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.2rem; margin-top: 1.4rem; padding-left: 3.5rem; }
+.fach-actions .btn { min-height: 46px; font-size: .81rem; padding-inline: 1.2rem; }
+.fach-contact { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); font-size: .81rem; text-decoration: underline; text-underline-offset: .25em; text-decoration-color: var(--accent-line); }
+.fach-contact:hover { text-decoration-color: currentColor; }
+.fach-next { padding-block: 1rem 3.5rem; }
+.fach-example-note { max-width: 82ch; margin-bottom: 2rem; color: var(--fach-muted); font-size: .78rem; line-height: 1.65; }
+.fach-cta-panel { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--accent-tint); border: 1px solid var(--accent-line); border-radius: 7px; }
+.fach-cta-panel h2 { margin-bottom: .8rem; color: var(--accent); font-size: clamp(1.5rem, 2.5vw, 2rem); }
+.fach-cta-panel p:not(.fach-eyebrow) { max-width: 47ch; font-size: .9rem; line-height: 1.7; color: var(--text-body); }
+.fach-cta-panel .btn { flex-shrink: 0; min-height: 48px; font-size: .84rem; }
+
+@media (max-width: 900px) {
+  .fach-jumps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fach-content { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .fach-questions { padding-left: 1.3rem; }
+  .fach-cta-panel { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 650px) {
+  .fach-hero { padding-block: 1.75rem 2.5rem; }
+  .fach-hero h1 { max-width: 24ch; }
+  .fach-intro { font-size: .96rem; }
+  .fach-jumps { margin-top: 1.5rem; }
+  .fach-jumps a { gap: .55rem; padding: 1rem .85rem; }
+  .fach-jumps strong { font-size: .82rem; }
+  .fach-jumps small { font-size: .7rem; }
+  .fach-section { padding-block: 2rem 2.3rem; }
+  .fach-section-head { grid-template-columns: 1.7rem minmax(0, 1fr); gap: .5rem; margin-bottom: 1.4rem; }
+  .fach-section-number { padding-top: .3rem; }
+  .fach-content { grid-template-columns: 1fr; gap: 1.4rem; padding-left: 0; }
+  .fach-evidence li { font-size: .91rem; }
+  .fach-questions { border-left: 2px solid var(--accent-line); padding-left: 1rem; }
+  .fach-questions li { font-size: .93rem; }
+  .fach-example { margin-left: 0; margin-top: 1.4rem; }
+  .fach-example summary { padding: 1rem; font-size: .85rem; }
+  .fach-example summary > span { display: block; margin: 0 0 .15rem; }
+  .fach-example-content { padding: 1rem 1.1rem 1.2rem; }
+  .fach-example blockquote { font-size: 1.12rem; }
+  .fach-actions { padding-left: 0; gap: .55rem 1rem; }
+  .fach-contact { font-size: .85rem; }
+  .fach-next { padding-bottom: 2.5rem; }
+}
+
+@media (max-width: 380px) {
+  .fach-jumps { grid-template-columns: 1fr; }
+  .fach-jumps a { min-height: 76px; padding-inline: 1rem; }
+  .fach-jumps strong { font-size: .88rem; }
+  .fach-actions { align-items: stretch; flex-direction: column; }
+  .fach-contact { justify-content: center; }
+  .fach-cta-panel .btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fach-jumps a { transition: none; }
+}
+
+@media print {
+  .specialist-page #nav-placeholder, .specialist-page #footer-placeholder, .fach-skip, .fach-back, .fach-jumps, .fach-actions, .fach-next { display: none; }
+  .fach-hero { padding-block: 0 1.5rem; }
+  .fach-section { break-inside: avoid; padding-block: 1.2rem; }
+  .fach-example > .fach-example-content { display: block !important; }
+  .fach-example::details-content { content-visibility: visible; }
+}

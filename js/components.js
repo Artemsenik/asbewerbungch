@@ -5,11 +5,12 @@ const NAV_HTML = `
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo"><img src="assets/img/logo-vogel.png" alt="" width="600" height="600" class="nav-mark" aria-hidden="true"><span>AS-Bewerbung.ch</span></a>
     <ul class="nav-links" role="list">
-      <li><a href="angebote.html">Angebote &amp; Preise</a></li>
+      <li><a href="fachbereiche.html">Fachbereiche</a></li>
+      <li><a href="angebote.html">Leistungen</a></li>
       <li><a href="ratgeber.html">Kostenlos üben</a></li>
       <li><a href="ueber-artem.html">Über Artem</a></li>
     </ul>
-    <a href="interview-check.html" class="btn btn-primary nav-cta">Kontakt</a>
+    <a href="interview-check.html" class="btn btn-primary nav-cta">Gespräch anfragen</a>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu" aria-haspopup="dialog">
       <span></span><span></span><span></span>
     </button>
@@ -23,12 +24,13 @@ const NAV_HTML = `
   </div>
   <nav aria-label="Mobile Hauptnavigation">
     <a href="index.html">Startseite</a>
-    <a href="angebote.html">Angebote &amp; Preise</a>
+    <a href="fachbereiche.html">Fachbereiche</a>
+    <a href="angebote.html">Leistungen &amp; Preise</a>
     <a href="ratgeber.html">Kostenlos üben</a>
-    <a href="antwort.html">Antwort-Werkstatt (kostenlos)</a>
+    <a href="erfahrung-ordnen.html">Erfahrung ordnen (kostenlos)</a>
     <a href="ueber-artem.html">Über Artem</a>
   </nav>
-  <a href="interview-check.html" class="btn btn-primary">Kontakt</a>
+  <a href="interview-check.html" class="btn btn-primary">Gespräch anfragen</a>
 </div>
 `;
 
@@ -38,7 +40,7 @@ const FOOTER_HTML = `
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo"><img src="assets/img/logo-vogel-weiss.png" alt="" width="600" height="600" class="footer-mark" aria-hidden="true"><span>AS-Bewerbung.ch</span></div>
-        <p>Bewerbungshilfe für Menschen 40+ in der Schweiz. Persönlich und online.</p>
+        <p>Bewerbungshilfe für erfahrene Fachkräfte aus Technik und Industrie. Persönlich und online in der Schweiz.</p>
         <ul class="footer-social" role="list">
           <li>
             <a href="https://www.instagram.com/as_bewerbung.ch/" target="_blank" rel="noopener">
@@ -64,6 +66,7 @@ const FOOTER_HTML = `
       <div class="footer-col">
         <h4>Kostenlos</h4>
         <ul>
+          <li><a href="erfahrung-ordnen.html">Erfahrung zur Stelle ordnen</a></li>
           <li><a href="antwort.html">Antwort-Werkstatt</a></li>
           <li><a href="ratgeber.html">Ratgeber</a></li>
           <li><a href="interview-check.html">Klarheitsgespräch (kostenlos)</a></li>
@@ -72,6 +75,7 @@ const FOOTER_HTML = `
       <div class="footer-col">
         <h4>Kontakt &amp; Infos</h4>
         <ul>
+          <li><a href="fachbereiche.html">Fachbereiche</a></li>
           <li><a href="ueber-artem.html">Über Artem</a></li>
           <li><a href="faq.html">Häufige Fragen</a></li>
           <li><a href="interview-check.html">Kontakt</a></li>

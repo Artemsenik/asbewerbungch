@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Beim Wechsel zur Desktopnavigation keinen unsichtbaren Dialog offenlassen.
-    const desktopNavigation = window.matchMedia('(min-width: 769px)');
+    const desktopNavigation = window.matchMedia('(min-width: 1001px)');
     desktopNavigation.addEventListener('change', event => {
       if (event.matches) closeMenu();
     });
