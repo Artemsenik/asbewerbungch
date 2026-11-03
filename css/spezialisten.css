@@ -1,0 +1,96 @@
+/* Gemeinsame Gestaltung der spezialisierten Seiten. */
+:root { --text-muted: #67645b; }
+[hidden] { display: none !important; }
+.sp-skip { position: fixed; top: -6rem; left: 1rem; z-index: 10010; padding: .75rem 1rem; background: var(--accent); color: #fff; }
+.sp-skip:focus { top: .5rem; }
+.sp-fallback { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; padding-block: 1rem; border-bottom: 1px solid var(--border); }
+.sp-fallback a { text-decoration: underline; text-underline-offset: .2em; }
+.specialist-page main { overflow: clip; }
+.specialist-page .section { padding-block: clamp(3rem, 6vw, 5rem); }
+.specialist-page h1 { font-size: clamp(2.5rem, 5.5vw, 4.4rem); line-height: 1.06; letter-spacing: -.025em; }
+.specialist-page h2 { font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.13; }
+.specialist-page h3 { font-size: clamp(1.4rem, 2vw, 1.75rem); }
+.specialist-page h1 em, .specialist-page h2 em { color: var(--accent); font-weight: 400; }
+.specialist-page main [id] { scroll-margin-top: 6.25rem; }
+.sp-eyebrow { color: var(--accent); font: 600 .73rem/1.5 var(--font-body); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; }
+.sp-intro { max-width: 61ch; font-size: clamp(1.06rem, 1.5vw, 1.2rem); line-height: 1.65; margin-top: 1.25rem; }
+.sp-section-head { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem 3rem; margin-bottom: 2rem; }
+.sp-section-head > p { max-width: 36ch; font-size: .94rem; }
+.sp-section-head h2 { max-width: 23ch; }
+.sp-link { color: var(--accent); font-size: .92rem; font-weight: 600; text-decoration: underline; text-underline-offset: .24em; text-decoration-thickness: 1px; }
+.sp-link:hover { text-decoration-thickness: 2px; }
+.sp-note { font-size: .83rem; line-height: 1.6; color: var(--text-muted); }
+.sp-cta-panel { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: clamp(1.5rem, 4vw, 3rem); background: var(--accent); color: #fff; border-radius: var(--radius-md); }
+.sp-cta-panel h2, .sp-cta-panel h3, .sp-cta-panel strong { color: #fff; }
+.sp-cta-panel p { margin-top: .65rem; color: #e2ece8; }
+.sp-cta-panel .sp-eyebrow { color: #c2d7d0; margin-top: 0; }
+.sp-cta-panel .btn { flex-shrink: 0; background: #fff; color: var(--accent); border-color: #fff; }
+.sp-cta-panel a:focus-visible, .site-footer a:focus-visible { outline-color: #fff; }
+.specialist-page details > summary { cursor: pointer; }
+.specialist-page .btn { min-height: 46px; }
+.specialist-page .btn-secondary { border-color: #738f87; }
+.specialist-page input, .specialist-page select, .specialist-page textarea { font: inherit; }
+.specialist-page input, .specialist-page select { min-height: 46px; }
+.site-nav .nav-logo { flex-shrink: 0; }
+.site-nav .nav-links { gap: 1.3rem; }
+.site-nav .nav-links a { display: flex; align-items: center; min-height: 44px; font-size: .82rem; }
+.site-nav .nav-cta { min-height: 42px; }
+.mobile-menu a { min-height: 44px; }
+.mobile-menu nav a { font-family: var(--font-body); font-size: 1rem; padding-block: .8rem; }
+.mobile-menu-header { margin-bottom: 1rem; }
+.mobile-menu .btn { margin-top: 1.5rem; }
+.footer-col a { display: inline-block; padding-block: .2rem; }
+.footer-col ul { overflow-wrap: anywhere; }
+.specialist-page .breadcrumb { padding-block: 1.15rem; margin: 0; font-size: .8rem; }
+.sp-contact-hero { padding-block: 1.8rem 2.8rem; }
+.sp-contact-section { padding-block: 0 4.5rem; }
+.sp-contact-section .contact-grid { align-items: start; gap: 4rem; }
+.sp-contact-section .contact-info { padding-top: 1.4rem; }
+.sp-contact-section .contact-info > p { font-size: .94rem; }
+.sp-contact-section .contact-info h2 { font-size: 2rem; }
+.sp-contact-orientation { margin-block: 1.75rem; padding-block: 1.5rem; border-block: 1px solid var(--border); }
+.sp-contact-orientation h3, .sp-contact-section .direct-contact h3 { font: 600 .95rem/1.5 var(--font-body); }
+.sp-contact-orientation p { font-size: .91rem; margin-top: .7rem; }
+.sp-contact-orientation .sp-note { font-size: .8rem; }
+.sp-contact-section .direct-contact { margin-top: 1.5rem; }
+.sp-contact-section .direct-contact a { overflow-wrap: anywhere; }
+.sp-contact-section .form-card { min-width: 0; }
+.sp-contact-section .form-card h3 { font-size: 1.6rem; }
+.sp-contact-section .form-field { margin-bottom: 1.15rem; }
+.sp-contact-section .form-consent input { min-height: auto; }
+.sp-contact-practice { margin-top: 1.75rem; }
+.sp-contact-privacy { margin-top: 1rem; }
+.sp-contact-privacy .sp-link { font-size: inherit; }
+.sp-practice-entry { display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 3rem; padding: 2.25rem; border: 1px solid var(--accent-line); border-radius: 10px; background: var(--accent-tint); margin-bottom: 1.4rem; }
+.sp-practice-entry h2 { font-size: 2.3rem; }
+.sp-practice-entry p:not(.sp-eyebrow) { font-size: .95rem; margin-block: 1rem 1.4rem; }
+.sp-practice-entry ol { list-style: none; }
+.sp-practice-entry li { display: flex; gap: 1rem; align-items: center; font-size: .91rem; padding-block: 1rem; border-bottom: 1px solid var(--accent-line); }
+.sp-practice-entry li:first-child { border-top: 1px solid var(--accent-line); }
+.sp-practice-entry li span { font-size: .74rem; color: var(--accent); }
+@media (max-width: 1000px) {
+  .site-nav .nav-links, .site-nav .nav-cta { display: none; }
+  .site-nav .nav-toggle { display: flex; }
+}
+@media (max-width: 680px) {
+  .sp-section-head, .sp-cta-panel { flex-direction: column; align-items: stretch; }
+  .sp-section-head { gap: 1rem; }
+  .sp-cta-panel .btn { align-self: start; }
+  .specialist-page .container { padding-inline: 1.25rem; }
+  .specialist-page .section { padding-block: 3rem; }
+  .sp-contact-section .contact-grid, .sp-practice-entry { grid-template-columns: 1fr; gap: 2rem; }
+  .sp-practice-entry { padding: 1.5rem; }
+  .sp-contact-section .contact-info { padding-top: 0; }
+}
+@media (max-width: 380px) {
+  .site-nav .nav-logo, .mobile-menu .nav-logo { font-size: .94rem; gap: .3rem; }
+  .specialist-page h1 { font-size: 2.45rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+@media print {
+  .site-nav, .mobile-menu, .site-footer, .sticky-mobile-cta, .sp-skip { display: none !important; }
+  body { padding: 0; background: #fff; color: #000; }
+}
